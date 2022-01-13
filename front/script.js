@@ -9,6 +9,7 @@ if ("content" in document.createElement("template")) {
     clone.querySelector("#imagesKanap").alt = data.altTxt;
     clone.querySelector(".productName").textContent = data.name;
     clone.querySelector(".productDescription").textContent = data.description;
+    clone.querySelector("a").href = `./product.html?id=${data._id}`;
 
     return clone;
   }
@@ -22,7 +23,7 @@ async function getProducts() {
   return renderObjects;
 }
 
-async function renderProducts() {
+async function renderAllProducts() {
   let descProduct = await getProducts();
   for (const product of descProduct) {
     let renderedProduct = renderProduct(product);
@@ -30,4 +31,4 @@ async function renderProducts() {
   }
 }
 
-renderProducts();
+renderAllProducts();
