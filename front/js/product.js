@@ -9,14 +9,21 @@ function getDataFromId(id) {
     .then((res) => res.json())
     .then((promise) => {
       /*apiData = promise;*/
-      console.log(promise);
       return promise;
     });
 }
 
 //Affichage Rendue à partir des données
-function renderProduct(data) {}
-
+function renderProduct(data) {
+  let imgProduct = `<img src="${data.imageUrl}" alt="${data.altTxt}"></img>`;
+  let nameProduct = `${data.name}`;
+  let priceProduct = `${data.price}`;
+  let descProduct = `${data.description}`;
+  console.log(imgProduct);
+  console.log(nameProduct);
+  console.log(priceProduct);
+  console.log(descProduct);
+}
 // Effectuer le rendue à partir de l'identifiant
 const fetchData = async () => {
   let identifiant = getID();
