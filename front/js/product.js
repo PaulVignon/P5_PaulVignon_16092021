@@ -14,16 +14,27 @@ function getDataFromId(id) {
 }
 
 //Affichage Rendue à partir des données
+let colorsTemplate = document.querySelector("#eachArray");
+let colorsSection = document.querySelector("#colorsSection");
+
 function renderProduct(data) {
   document.querySelector("#imgPrdct").src = data.imageUrl;
   document.querySelector("#imgPrdct").alt = data.altTxt;
   document.querySelector("#title").textContent = data.name;
   document.querySelector("#price").textContent = data.price;
   document.querySelector("#description").textContent = data.description;
-  let newOption = document.createElement("option");
-  newOption.textContent = data.colors;
-  newOption.value = "0";
-  document.querySelector("#colors").appendChild(newOption);
+  /* if ("content" in document.createElement("template")) {
+    function blabla(data)
+    let clone = document.importNode(colorsTemplate.content, true);
+    let newOption = document.createElement("option");
+  }*/
+  for (const eachColors of data.colors) {
+    let newOption = document.createElement("option");
+    newOption.textContent = eachColors;
+    newOption.value = eachColors;
+    document.querySelector("#colors").appendChild(newOption);
+    console.log(newOption);
+  }
 
   /*let imgProduct = `<img src="${data.imageUrl}" alt="${data.altTxt}"></img>`;
   let nameProduct = `${data.name}`;
@@ -35,7 +46,6 @@ function renderProduct(data) {
   console.log(descProduct);*/
 }
 
-renderAllProducts();
 // Effectuer le rendue à partir de l'identifiant
 const fetchData = async () => {
   let identifiant = getID();
@@ -44,14 +54,6 @@ const fetchData = async () => {
   console.log(data);
   renderProduct(data);
 };
-
-async function renderAllProducts() {
-  let descProduct = await getProducts();
-  for (const product of descProduct) {
-    let renderedProduct = renderProduct(product);
-    section.appendChild(renderedProduct);
-  }
-}
 
 fetchData();
 
