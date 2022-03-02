@@ -58,3 +58,5 @@ const fetchData = async () => {
 fetchData();
 
 console.log();
+
+document.getElementById("addToCart").onclick = function () {};
