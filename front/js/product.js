@@ -1,3 +1,5 @@
+import { stocker, recuperer, ajouterAuPanier } from "./store.js";
+
 //Récuperer l'identifiant
 function getID() {
   return new URL(document.location.href).searchParams.get("id");
@@ -23,17 +25,36 @@ function renderProduct(data) {
   document.querySelector("#title").textContent = data.name;
   document.querySelector("#price").textContent = data.price;
   document.querySelector("#description").textContent = data.description;
-  /* if ("content" in document.createElement("template")) {
-    function blabla(data)
-    let clone = document.importNode(colorsTemplate.content, true);
-    let newOption = document.createElement("option");
-  }*/
+
+  const idForm = document.querySelector("#colors");
+
+  const quantityForm = document.querySelector("#quantity");
+  parseInt(quantityForm);
+
+  console.log(idForm);
+
+  const envoyerPanier = document.querySelector("#addToCart");
+
+  envoyerPanier.addEventListener("click", (event) => {
+    event.preventDefault();
+
+    const formSelection = {
+      ...data,
+      color: idForm.value,
+      quantity: +quantityForm.value,
+    };
+
+    console.log(formSelection);
+
+    ajouterAuPanier(formSelection);
+  });
+
   for (const eachColors of data.colors) {
     let newOption = document.createElement("option");
     newOption.textContent = eachColors;
     newOption.value = eachColors;
     document.querySelector("#colors").appendChild(newOption);
-    console.log(newOption);
+    //console.log(newOption);
   }
 
   /*let imgProduct = `<img src="${data.imageUrl}" alt="${data.altTxt}"></img>`;
@@ -49,7 +70,7 @@ function renderProduct(data) {
 // Effectuer le rendue à partir de l'identifiant
 const fetchData = async () => {
   let identifiant = getID();
-  console.log(identifiant);
+  //console.log(identifiant);
   let data = await getDataFromId(identifiant);
   console.log(data);
   renderProduct(data);
@@ -58,5 +79,3 @@ const fetchData = async () => {
 fetchData();
 
 console.log();
-
-document.getElementById("addToCart").onclick = function () {};
