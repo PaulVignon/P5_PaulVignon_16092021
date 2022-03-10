@@ -43,9 +43,7 @@ function renderProduct(data) {
       color: idForm.value,
       quantity: +quantityForm.value,
     };
-
-    console.log(formSelection);
-
+    stocker(formSelection);
     ajouterAuPanier(formSelection);
   });
 
